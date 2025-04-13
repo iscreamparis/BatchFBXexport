@@ -25,8 +25,9 @@ def main():
     SKIP_EXISTING = True  # Skip segments that already have FBX files
     PROCESS_TIMEOUT = 120  # Maximum seconds to wait for Cascadeur (2 minutes)
     
-    # Read config file to get CASC file and export directory
-    config_path = os.path.join(script_dir, "export_config.txt")
+    # Use the new config file path
+    config_path = "C:\\FBX_export_config.txt"
+    
     with open(config_path, 'r') as f:
         lines = f.readlines()
         

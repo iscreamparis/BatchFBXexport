@@ -6,9 +6,8 @@ def command_name():
     return "Batch Export FBX Segments"
 
 def run(scene):
-    # IMPORTANT: Use the exact same path as in the backup file
-    # This is crucial because Cascadeur may be looking for this specific path
-    config_path = "G:\\Mon Drive\\scripts\\BatchFBXexport\\export_config.txt"
+    # IMPORTANT: Use the new path
+    config_path = "C:\\FBX_export_config.txt"
     
     try:
         with open(config_path, 'r', encoding='utf-8') as f:

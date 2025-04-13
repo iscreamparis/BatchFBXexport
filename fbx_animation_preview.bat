@@ -97,7 +97,7 @@ for %%F in ("%FOLDER%\*.casc") do (
 
   REM Create a config file with ABSOLUTE paths for this CASC file
   echo Writing config file with absolute paths...
-  set CONFIG_FILE=%~dp0export_config.txt
+  set CONFIG_FILE=C:\FBX_export_config.txt
   echo !CASC_FILE! > "!CONFIG_FILE!"
   echo %FOLDER%\exported_fbx >> "!CONFIG_FILE!"
 
