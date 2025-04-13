@@ -7,7 +7,7 @@ def command_name():
 
 def run(scene):             
     # Read config file
-    config_path = "G:\\Mon Drive\\scripts\\fbxAnimationPreview\\export_config.txt"
+    config_path = "G:\\Mon Drive\\scripts\\BatchFBXexport\\export_config.txt"
     with open(config_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         

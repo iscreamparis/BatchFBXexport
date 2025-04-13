@@ -5,13 +5,13 @@ import traceback
 
 # Function to log messages to file
 def log(message):
-    with open("G:\\Mon Drive\\scripts\\fbxAnimationPreview\\blender_log.txt", "a") as f:
+    with open("G:\\Mon Drive\\scripts\\BatchFBXexport\\blender_log.txt", "a") as f:
         f.write(str(message) + "\n")
     print(message)
 
 # Clear log for this file
 def clear_log():
-    with open("G:\\Mon Drive\\scripts\\fbxAnimationPreview\\blender_log.txt", "w") as f:
+    with open("G:\\Mon Drive\\scripts\\BatchFBXexport\\blender_log.txt", "w") as f:
         f.write("Starting Blender render process for single FBX\n")
 
 clear_log()
