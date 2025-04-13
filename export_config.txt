@@ -1,0 +1,5 @@
+G:\Mon Drive\scripts\BatchFBXexport\testUnit\OK - Allumer un feu silex.casc
+G:\Mon Drive\scripts\BatchFBXexport\testUnit\exported_fbx
+106
+188
+2

@@ -38,8 +38,8 @@ if %CASC_COUNT% EQU 0 (
 echo Found %CASC_COUNT% CASC files to process.
 
 REM Define paths
-set CASC_SCRIPT=G:\Mon Drive\scripts\BatchFBXexport\BatchExportFBXsegments.py
-set EXPORT_SCRIPT=G:\Mon Drive\scripts\BatchFBXexport\export_all_segments.py
+set CASC_SCRIPT=%~dp0BatchExportFBXsegments.py
+set EXPORT_SCRIPT=%~dp0export_all_segments.py
 set COMMANDS_DIR=C:\Program Files\Cascadeur\resources\scripts\python\commands
 set CASCADEUR="C:\Program Files\Cascadeur\cascadeur.exe"
 set BLENDER="C:\Program Files\Blender Foundation\Blender 4.4\blender.exe"
@@ -97,19 +97,15 @@ for %%F in ("%FOLDER%\*.casc") do (
 
   REM Create a config file with ABSOLUTE paths for this CASC file
   echo Writing config file with absolute paths...
-  echo !CASC_FILE! > "G:\Mon Drive\scripts\BatchFBXexport\export_config.txt"
-  echo %FOLDER%\exported_fbx >> "G:\Mon Drive\scripts\BatchFBXexport\export_config.txt"
-
-  REM Clear log files for this run
-  echo. > "G:\Mon Drive\scripts\BatchFBXexport\export_log.txt"
-  echo. > "G:\Mon Drive\scripts\BatchFBXexport\orchestrator_log.txt"
+  set CONFIG_FILE=%~dp0export_config.txt
+  echo !CASC_FILE! > "!CONFIG_FILE!"
+  echo %FOLDER%\exported_fbx >> "!CONFIG_FILE!"
 
   REM Run orchestration script to export segments for this file
   echo Running export_all_segments.py for !CASC_FILE!...
   python "%EXPORT_SCRIPT%" %CASCADEUR%
   if !ERRORLEVEL! NEQ 0 (
     echo ERROR: FBX export failed for !CASC_FILE! with error code !ERRORLEVEL!
-    type "G:\Mon Drive\scripts\BatchFBXexport\orchestrator_log.txt"
     echo Continuing with next file...
   )
 )
@@ -119,7 +115,6 @@ echo Checking for exported FBX files...
 dir /b "%FOLDER%\exported_fbx\*.fbx" 2>nul
 if %ERRORLEVEL% NEQ 0 (
   echo ERROR: No FBX files were exported.
-  type "G:\Mon Drive\scripts\BatchFBXexport\orchestrator_log.txt"
   pause
   exit /b 1
 )
@@ -128,7 +123,7 @@ REM Run Blender to render each FBX file individually
 echo Running Blender to render FBX files...
 for %%F in ("%FOLDER%\exported_fbx\*.fbx") do (
   echo Processing FBX file in Blender: %%F
-  %BLENDER% --background --python "G:\Mon Drive\scripts\BatchFBXexport\blender_render_single.py" -- "%%F"
+  %BLENDER% --background --python "%~dp0blender_render_single.py" -- "%%F"
   if !ERRORLEVEL! NEQ 0 (
     echo WARNING: Blender rendering failed for %%F with error code !ERRORLEVEL!
   )
